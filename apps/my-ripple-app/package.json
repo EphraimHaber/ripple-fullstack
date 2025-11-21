@@ -13,13 +13,14 @@
     "build:prod": "vite build --mode production",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "serve": "vite preview",
+    "serve:dev": "vite preview --mode development",
+    "serve:prod": "vite preview --mode production",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
-    "preview": "pnpm build && pnpm serve",
-    "preview:prod": "pnpm build:prod && pnpm serve",
-    "preview:dev": "pnpm build:dev && pnpm serve"
+    "preview": "pnpm preview:dev",
+    "preview:prod": "pnpm build:prod && pnpm serve:prod",
+    "preview:dev": "pnpm build:dev && pnpm serve:dev"
   },
   "license": "MIT",
   "devDependencies": {
