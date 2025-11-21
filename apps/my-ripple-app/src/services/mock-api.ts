@@ -7,24 +7,26 @@ const mockUsers: User[] = [
 ];
 
 export async function mockGetAllUsers(options?: { simulateDelay?: boolean; simulateError?: boolean }): Promise<User[]> {
-  if (options?.simulateError) {
-    throw new Error('Failed to fetch users');
-  }
   
   if (options?.simulateDelay) {
     await new Promise(resolve => setTimeout(resolve, 3000));
   }
   
+  if (options?.simulateError) {
+    throw new Error('Failed to fetch users');
+  }
+
   return Promise.resolve(mockUsers);
 }
 
 export async function mockGetUserById(id: number, options?: { simulateDelay?: boolean; simulateError?: boolean }): Promise<User | undefined> {
-  if (options?.simulateError) {
-    throw new Error('Failed to fetch user data');
-  }
   
   if (options?.simulateDelay) {
     await new Promise(resolve => setTimeout(resolve, 3000));
+  }
+  
+  if (options?.simulateError) {
+    throw new Error('Failed to fetch user data');
   }
   
   const user = mockUsers.find(u => u.id === id);
