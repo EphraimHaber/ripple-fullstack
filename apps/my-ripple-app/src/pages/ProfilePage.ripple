@@ -31,7 +31,29 @@ export component ProfilePage(props: ProfilePageProps) {
 				</AppLink>
 			</div>
 
-			if (query.isLoading) {
+			<div class="mb-6 card p-4 space-y-3">
+				<h3 class="font-semibold text-sm">{'Testing Options'}</h3>
+				<label class="flex items-center gap-2 cursor-pointer">
+					<input
+						type="checkbox"
+						checked={@simulateDelay}
+						onChange={(e) => (@simulateDelay = (e.target as HTMLInputElement).checked)}
+						class="w-4 h-4 rounded border-input bg-background"
+					/>
+					<span class="text-sm">{'Simulate 3s delay'}</span>
+				</label>
+				<label class="flex items-center gap-2 cursor-pointer">
+					<input
+						type="checkbox"
+						checked={@simulateError}
+						onChange={(e) => (@simulateError = (e.target as HTMLInputElement).checked)}
+						class="w-4 h-4 rounded border-input bg-background"
+					/>
+					<span class="text-sm">{'Simulate error'}</span>
+				</label>
+			</div>
+
+			if (query.isLoading || query.isFetching) {
 				<div class="card p-8">
 					<div class="flex items-center justify-center py-12">
 						<div class="text-center space-y-3">
@@ -42,40 +64,20 @@ export component ProfilePage(props: ProfilePageProps) {
 						</div>
 					</div>
 				</div>
-			} else if (query.isError) {
-				<div class="card bg-destructive/10 border-destructive/50 p-6">
+			}
+
+			if (query.isError) {
+				<div class="card bg-destructive/10 border-destructive/50 p-6 mb-6">
 					<h3 class="text-destructive font-semibold mb-2">{'Error Loading User'}</h3>
 					<p class="text-sm text-muted-foreground">{`${query.error.message}`}</p>
 				</div>
-			} else if (query.isSuccess && query.data) {
+			}
+
+			if (query.isSuccess && query.data && !query.isFetching) {
 				<div class="card p-8">
 					<div class="mb-6">
 						<h1 class="text-3xl font-bold mb-2">{'User Profile'}</h1>
 						<p class="text-muted-foreground">{'View user information'}</p>
-					</div>
-
-					<div class="mb-6 p-4 bg-muted/30 rounded-lg space-y-3">
-						<h3 class="font-semibold text-sm">{'Testing Options'}</h3>
-						<label class="flex items-center gap-2 cursor-pointer">
-							<input
-								type="checkbox"
-								checked={@simulateDelay}
-								onChange={(e) => (@simulateDelay =
-									(e.target as HTMLInputElement).checked)}
-								class="w-4 h-4 rounded border-input bg-background"
-							/>
-							<span class="text-sm">{'Simulate 3s delay'}</span>
-						</label>
-						<label class="flex items-center gap-2 cursor-pointer">
-							<input
-								type="checkbox"
-								checked={@simulateError}
-								onChange={(e) => (@simulateError =
-									(e.target as HTMLInputElement).checked)}
-								class="w-4 h-4 rounded border-input bg-background"
-							/>
-							<span class="text-sm">{'Simulate error'}</span>
-						</label>
 					</div>
 
 					<div class="card p-6 bg-muted/50">

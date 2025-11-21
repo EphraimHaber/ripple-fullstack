@@ -4,11 +4,13 @@ import { AppLink } from '../components/AppLink.ripple';
 export component HomePage() {
 	const isMocked = getMockApi();
 
-	<div class="min-h-screen p-4">
+	<div class="min-h-screen p-4 sm:p-6">
 		<div class="container mx-auto max-w-4xl">
-			<div class="text-center mb-12">
-				<h1 class="text-5xl font-bold mb-4">{'Ripple Fullstack Showcase'}</h1>
-				<p class="text-xl text-muted-foreground mb-8">
+			<div class="text-center mb-8 sm:mb-12">
+				<h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
+					{'Ripple Fullstack Showcase'}
+				</h1>
+				<p class="text-lg sm:text-xl text-muted-foreground mb-6 sm:mb-8">
 					{'A demonstration of the Ripple TypeScript framework'}
 				</p>
 				<a
@@ -21,17 +23,17 @@ export component HomePage() {
 			</div>
 
 			if (isMocked) {
-				<div class="card p-6 bg-yellow-500/10 border-yellow-500/50 mb-8">
-					<p class="text-sm text-yellow-600 dark:text-yellow-400">
+				<div class="card p-4 sm:p-6 bg-yellow-500/10 border-yellow-500/50 mb-6 sm:mb-8">
+					<p class="text-sm sm:text-base text-yellow-600 dark:text-yellow-400">
 						{'⚠️ This is a GitHub Pages deployment. The API is mocked in-memory for demonstration purposes.'}
 					</p>
 				</div>
 			}
 
-			<div class="card p-8 mb-8">
-				<h2 class="text-3xl font-bold mb-6">{'About This Project'}</h2>
-				<div class="space-y-6 text-base text-foreground">
-					<p class="text-lg">
+			<div class="card p-6 sm:p-8 mb-6 sm:mb-8">
+				<h2 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">{'About This Project'}</h2>
+				<div class="space-y-4 sm:space-y-6 text-base text-foreground">
+					<p class="text-base sm:text-lg">
 						{'A demonstration of the '}
 						<a
 							href="https://www.ripplejs.com/"
@@ -43,47 +45,59 @@ export component HomePage() {
 						{' TypeScript framework with a fullstack application.'}
 					</p>
 					<div>
-						<h3 class="text-xl font-semibold text-foreground mb-3">{'Stack'}</h3>
-						<ul class="list-disc list-inside space-y-2 text-base">
+						<h3 class="text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3">
+							{'Stack'}
+						</h3>
+						<ul
+							class="list-disc list-inside space-y-1 sm:space-y-2 text-sm sm:text-base"
+						>
 							<li>{'Frontend: Ripple, TanStack Query, Tailwind CSS, Vite'}</li>
 							<li>{'Backend: Express.js, TypeScript'}</li>
 							<li>{'Monorepo: pnpm workspaces, Turborepo'}</li>
 						</ul>
 					</div>
 					<div>
-						<h3 class="text-xl font-semibold text-foreground mb-3">{'Development'}</h3>
-						<p class="text-base mb-3">
+						<h3 class="text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3">
+							{'Development'}
+						</h3>
+						<p class="text-sm sm:text-base mb-2 sm:mb-3">
 							{'To run the full application with the backend:'}
 						</p>
-						<code class="block p-4 bg-muted rounded text-base mb-3 font-mono">
+						<code
+							class="block p-3 sm:p-4 bg-muted rounded text-sm sm:text-base mb-2 sm:mb-3 font-mono overflow-x-auto"
+						>
 							{'pnpm preview'}
 						</code>
-						<p class="text-base">
+						<p class="text-sm sm:text-base">
 							{'This builds the frontend, starts the backend API server at '}
-							<code class="px-2 py-1 rounded bg-muted text-primary font-mono text-sm">
+							<code
+								class="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded bg-muted text-primary font-mono text-xs sm:text-sm break-all"
+							>
 								{'http://localhost:3001'}
 							</code>
 							{', and serves the app at '}
-							<code class="px-2 py-1 rounded bg-muted text-primary font-mono text-sm">
+							<code
+								class="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded bg-muted text-primary font-mono text-xs sm:text-sm break-all"
+							>
 								{'http://localhost:4173'}
 							</code>
 							{'.'}
 						</p>
 					</div>
 					if (!isMocked) {
-						<div class="p-5 bg-green-500/10 border border-green-500/50 rounded">
-							<p class="text-base text-green-600 dark:text-green-400">
+						<div class="p-4 sm:p-5 bg-green-500/10 border border-green-500/50 rounded">
+							<p class="text-sm sm:text-base text-green-600 dark:text-green-400">
 								{'✅ Running with actual Express.js backend'}
 							</p>
 						</div>
 					} else {
-						<div class="p-5 bg-blue-500/10 border border-blue-500/50 rounded">
-							<p class="text-base text-blue-600 dark:text-blue-400">
+						<div class="p-4 sm:p-5 bg-blue-500/10 border border-blue-500/50 rounded">
+							<p class="text-sm sm:text-base text-blue-600 dark:text-blue-400">
 								{'ℹ️ To see how it interacts with an actual backend, clone the '}
 								<a
 									href="https://github.com/EphraimHaber/ripple-fullstack"
 									target="_blank"
-									class="underline font-semibold"
+									class="underline font-semibold break-words"
 								>
 									{'repository'}
 								</a>
@@ -94,7 +108,7 @@ export component HomePage() {
 				</div>
 			</div>
 
-			<div class="grid md:grid-cols-2 gap-6">
+			<div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
 				<div class="card p-6">
 					<h2 class="text-2xl font-bold mb-3">{'Counter Page'}</h2>
 					<p class="text-muted-foreground mb-4">

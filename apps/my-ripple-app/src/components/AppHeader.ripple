@@ -2,27 +2,37 @@ import { AppLink } from './AppLink.ripple';
 
 export component AppHeader() {
 	<header class="border-b bg-card/30 backdrop-blur-sm sticky top-0 z-50">
-		<div class="container mx-auto px-4 py-4">
-			<nav class="flex items-center justify-between">
+		<div class="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
+			<nav class="flex items-center justify-between gap-2 sm:gap-4">
 				<AppLink to="/">
 					<div
-						class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+						class="flex items-center gap-1 sm:gap-2 cursor-pointer hover:opacity-80 transition-opacity min-w-0"
 					>
-						<div class="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-							<span class="text-lg font-bold text-primary-foreground">{'R'}</span>
+						<div
+							class="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-primary flex items-center justify-center flex-shrink-0"
+						>
+							<span class="text-base sm:text-lg font-bold text-primary-foreground">
+								{'R'}
+							</span>
 						</div>
-						<h1 class="text-xl font-bold">{'Ripple Showcase'}</h1>
+						<h1 class="text-base sm:text-xl font-bold truncate">{'Ripple Showcase'}</h1>
 					</div>
 				</AppLink>
-				<div class="flex items-center gap-2">
+				<div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
 					<AppLink to="/">
-						<span class="btn btn-ghost text-base">{'🏠 Home'}</span>
+						<span class="btn btn-ghost text-xs sm:text-base px-2 sm:px-4">
+							{'🏠 Home'}
+						</span>
 					</AppLink>
 					<AppLink to="/counter">
-						<span class="btn btn-ghost text-base">{'🔢 Counter'}</span>
+						<span class="btn btn-ghost text-xs sm:text-base px-2 sm:px-4">
+							{'🔢 Counter'}
+						</span>
 					</AppLink>
 					<AppLink to="/users">
-						<span class="btn btn-ghost text-base">{'👥 Users'}</span>
+						<span class="btn btn-ghost text-xs sm:text-base px-2 sm:px-4">
+							{'👥 Users'}
+						</span>
 					</AppLink>
 				</div>
 			</nav>
