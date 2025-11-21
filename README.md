@@ -6,7 +6,7 @@ A demonstration of the [Ripple](https://www.ripplejs.com/) TypeScript framework 
 
 - Frontend: Ripple, TanStack Query, Tailwind CSS, Vite
 - Backend: Express.js, TypeScript
-- Monorepo: pnpm workspaces, Turbo
+- Monorepo: pnpm workspaces, Turborepo
 
 ## Setup
 
@@ -29,6 +29,8 @@ This command runs from the project root and:
 - Vite proxies `/api` requests to the backend
 
 Access the application at `http://localhost:4173`.
+
+**Note:** The GitHub Pages deployment uses a mocked in-memory API. To see how the frontend interacts with an actual backend, clone this repository and run it locally. The backend uses Express with TypeScript.
 
 ## Production Build
 

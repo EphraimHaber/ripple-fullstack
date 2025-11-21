@@ -28,6 +28,72 @@ export component HomePage() {
 				</div>
 			}
 
+			<div class="card p-8 mb-8">
+				<h2 class="text-3xl font-bold mb-6">{'About This Project'}</h2>
+				<div class="space-y-6 text-base text-foreground">
+					<p class="text-lg">
+						{'A demonstration of the '}
+						<a
+							href="https://www.ripplejs.com/"
+							target="_blank"
+							class="text-primary hover:underline font-semibold"
+						>
+							{'Ripple'}
+						</a>
+						{' TypeScript framework with a fullstack application.'}
+					</p>
+					<div>
+						<h3 class="text-xl font-semibold text-foreground mb-3">{'Stack'}</h3>
+						<ul class="list-disc list-inside space-y-2 text-base">
+							<li>{'Frontend: Ripple, TanStack Query, Tailwind CSS, Vite'}</li>
+							<li>{'Backend: Express.js, TypeScript'}</li>
+							<li>{'Monorepo: pnpm workspaces, Turborepo'}</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="text-xl font-semibold text-foreground mb-3">{'Development'}</h3>
+						<p class="text-base mb-3">
+							{'To run the full application with the backend:'}
+						</p>
+						<code class="block p-4 bg-muted rounded text-base mb-3 font-mono">
+							{'pnpm preview'}
+						</code>
+						<p class="text-base">
+							{'This builds the frontend, starts the backend API server at '}
+							<code class="px-2 py-1 rounded bg-muted text-primary font-mono text-sm">
+								{'http://localhost:3001'}
+							</code>
+							{', and serves the app at '}
+							<code class="px-2 py-1 rounded bg-muted text-primary font-mono text-sm">
+								{'http://localhost:4173'}
+							</code>
+							{'.'}
+						</p>
+					</div>
+					if (!isMocked) {
+						<div class="p-5 bg-green-500/10 border border-green-500/50 rounded">
+							<p class="text-base text-green-600 dark:text-green-400">
+								{'✅ Running with actual Express.js backend'}
+							</p>
+						</div>
+					} else {
+						<div class="p-5 bg-blue-500/10 border border-blue-500/50 rounded">
+							<p class="text-base text-blue-600 dark:text-blue-400">
+								{'ℹ️ To see how it interacts with an actual backend, clone the '}
+								<a
+									href="https://github.com/EphraimHaber/ripple-fullstack"
+									target="_blank"
+									class="underline font-semibold"
+								>
+									{'repository'}
+								</a>
+								{' and run it locally. The backend uses Express with TypeScript.'}
+							</p>
+						</div>
+					}
+				</div>
+			</div>
+
 			<div class="grid md:grid-cols-2 gap-6">
 				<div class="card p-6">
 					<h2 class="text-2xl font-bold mb-3">{'Counter Page'}</h2>
