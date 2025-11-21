@@ -1,8 +1,7 @@
 import { createQuery } from 'tanstack-ripple-query';
-import { createApiHeaders } from '../utils/api.ripple';
+import { getAllUsers } from '../services/user-service';
 import { UserCard } from '../components/UserCard.ripple';
 import { track } from 'ripple';
-import type { User } from '../types.ripple';
 
 export component UsersPage() {
 	let simulateDelay = track(false);
@@ -13,18 +12,12 @@ export component UsersPage() {
 			() => ({
 				queryKey: ['users', @simulateDelay, @simulateError],
 				queryFn: async () => {
-					const headers = createApiHeaders(
+					return getAllUsers(
 						{
 							simulateDelay: @simulateDelay,
 							simulateError: @simulateError,
 						},
 					);
-					const response = await fetch('/api/users', { headers });
-					if (!response.ok) {
-						const error = await response.json();
-						throw new Error(error.message || 'Failed to fetch users');
-					}
-					return response.json() as Promise<User[]>;
 				},
 			}),
 		),

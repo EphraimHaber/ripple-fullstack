@@ -1,7 +1,12 @@
-
 import type { User } from '../types.ripple';
+import { getMockApi } from '../utils/env';
+import { mockGetAllUsers, mockGetUserById } from './mock-api';
 
 export async function getUserById(id: number, options?: { simulateDelay?: boolean; simulateError?: boolean }): Promise<User | undefined> {
+    if (getMockApi()) {
+        return mockGetUserById(id, options);
+    }
+    
     const headers: HeadersInit = {};
     if (options?.simulateDelay) headers['X-Delay'] = 'true';
     if (options?.simulateError) headers['X-Fail'] = 'true';
@@ -17,6 +22,10 @@ export async function getUserById(id: number, options?: { simulateDelay?: boolea
 }
 
 export async function getAllUsers(options?: { simulateDelay?: boolean; simulateError?: boolean }): Promise<User[]> {
+    if (getMockApi()) {
+        return mockGetAllUsers(options);
+    }
+    
     const headers: HeadersInit = {};
     if (options?.simulateDelay) headers['X-Delay'] = 'true';
     if (options?.simulateError) headers['X-Fail'] = 'true';

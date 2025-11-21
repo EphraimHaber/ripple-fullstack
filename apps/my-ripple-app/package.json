@@ -10,12 +10,16 @@
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
+    "build:prod": "vite build --mode production",
+    "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "serve": "vite preview",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
-    "preview": "pnpm build && pnpm serve"
+    "preview": "pnpm build && pnpm serve",
+    "preview:prod": "pnpm build:prod && pnpm serve",
+    "preview:dev": "pnpm build:dev && pnpm serve"
   },
   "license": "MIT",
   "devDependencies": {

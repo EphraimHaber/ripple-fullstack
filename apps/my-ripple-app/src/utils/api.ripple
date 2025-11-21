@@ -1,6 +1,0 @@
-export function createApiHeaders(options?: { simulateDelay?: boolean; simulateError?: boolean }): HeadersInit {
-    const headers: HeadersInit = {};
-    if (options?.simulateDelay) headers['X-Delay'] = 'true';
-    if (options?.simulateError) headers['X-Fail'] = 'true';
-    return headers;
-}

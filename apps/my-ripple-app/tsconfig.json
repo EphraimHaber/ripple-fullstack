@@ -10,6 +10,8 @@
 		"jsxImportSource": "ripple",
 		"noEmit": true,
 		"isolatedModules": true,
-		"plugins": [{ "name": "@ripple-ts/typescript-plugin" }]
-	}
+		"plugins": [{ "name": "@ripple-ts/typescript-plugin" }],
+		"types": ["vite/client"]
+	},
+	"include": ["src/**/*"]
 }

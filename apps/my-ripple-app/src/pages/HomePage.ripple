@@ -1,63 +1,63 @@
-import { track } from 'ripple';
+import { getMockApi } from '../utils/env';
+import { AppLink } from '../components/AppLink.ripple';
 
 export component HomePage() {
-	let count = track(0);
+	const isMocked = getMockApi();
 
-	<div class="min-h-screen flex items-center justify-center p-4">
-		<div class="card max-w-md w-full p-10 text-center space-y-6">
-			<div>
-				<h1 class="text-3xl font-bold mb-2">{'Welcome to Ripple'}</h1>
-				<p class="text-muted-foreground text-base">
-					{'The elegant TypeScript UI framework.'}
+	<div class="min-h-screen p-4">
+		<div class="container mx-auto max-w-4xl">
+			<div class="text-center mb-12">
+				<h1 class="text-5xl font-bold mb-4">{'Ripple Fullstack Showcase'}</h1>
+				<p class="text-xl text-muted-foreground mb-8">
+					{'A demonstration of the Ripple TypeScript framework'}
 				</p>
-			</div>
-
-			<img
-				src="../src/assets/ripple-logo-horizontal.png"
-				alt="Ripple Logo"
-				class="w-40 mx-auto"
-			/>
-
-			<div class="flex items-center justify-center gap-4 py-4">
-				<button
-					onClick={() => @count--}
-					class="btn btn-outline btn-icon text-lg font-semibold"
-				>
-					{'-'}
-				</button>
-				<span class="text-2xl font-semibold min-w-12 text-center">{@count}</span>
-				<button
-					onClick={() => @count++}
-					class="btn btn-outline btn-icon text-lg font-semibold"
-				>
-					{'+'}
-				</button>
-			</div>
-
-			<div class="flex justify-center gap-3">
-				<a href="https://www.ripplejs.com/" target="_blank" class="btn btn-primary">
-					{'Docs'}
-				</a>
 				<a
-					href="https://github.com/Ripple-TS/ripple"
+					href="https://github.com/EphraimHaber/ripple-fullstack"
 					target="_blank"
-					class="btn btn-secondary"
+					class="btn btn-primary"
 				>
-					{'GitHub'}
+					{'View on GitHub'}
 				</a>
 			</div>
 
-			<div class="pt-4 space-y-2">
-				<p class="text-sm text-muted-foreground">
-					{'This is a basic Ripple application template.'}
-				</p>
-				<p class="text-xs text-muted-foreground">
-					{'Edit '}
-					<code class="px-1.5 py-0.5 rounded bg-muted text-primary font-mono text-xs">
-						{'src/App.ripple'}
-					</code>
-					{' to get started.'}
-				</p>
+			if (isMocked) {
+				<div class="card p-6 bg-yellow-500/10 border-yellow-500/50 mb-8">
+					<p class="text-sm text-yellow-600 dark:text-yellow-400">
+						{'⚠️ This is a GitHub Pages deployment. The API is mocked in-memory for demonstration purposes.'}
+					</p>
+				</div>
+			}
+
+			<div class="grid md:grid-cols-2 gap-6">
+				<div class="card p-6">
+					<h2 class="text-2xl font-bold mb-3">{'Counter Page'}</h2>
+					<p class="text-muted-foreground mb-4">
+						{'Demonstrates Ripple\'s fine-grained reactivity with tracked state. The counter uses the '}
+						<code class="px-1.5 py-0.5 rounded bg-muted text-primary font-mono text-xs">
+							{'track()'}
+						</code>
+						{' function and '}
+						<code class="px-1.5 py-0.5 rounded bg-muted text-primary font-mono text-xs">
+							{'@'}
+						</code>
+						{' syntax for reactive updates.'}
+					</p>
+					<AppLink to="/counter">
+						<span class="btn btn-outline">{'View Counter'}</span>
+					</AppLink>
+				</div>
+
+				<div class="card p-6">
+					<h2 class="text-2xl font-bold mb-3">{'Users Page'}</h2>
+					<p class="text-muted-foreground mb-4">
+						{isMocked
+							? 'Shows data fetching with TanStack Query using an in-memory mock API. Includes loading states, error handling, and delay simulation.'
+							: 'Shows data fetching with TanStack Query connected to a real Express.js backend. Includes loading states, error handling, and delay simulation.'}
+					</p>
+					<AppLink to="/users">
+						<span class="btn btn-outline">{'View Users'}</span>
+					</AppLink>
+				</div>
 			</div>
 		</div>
 	</div>

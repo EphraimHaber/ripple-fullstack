@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
 	plugins: [ripple(), tailwindcss()],
+	base: process.env.GITHUB_PAGES === 'true' ? '/ripple-fullstack/' : '/',
 	build: {
 		target: 'esnext',
 	},
