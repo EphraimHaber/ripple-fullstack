@@ -6,15 +6,21 @@ import { ProfilePage } from './pages/ProfilePage.ripple';
 import { AppHeader } from './components/AppHeader.ripple';
 import { NotFoundPage } from './pages/NotFoundPage.ripple';
 import { QueryClientProvider, queryClient } from './tanstack-stuff';
+import { getRootPath } from './utils/base-path';
 
 export component App() {
+	const root = getRootPath();
+
 	<QueryClientProvider client={queryClient}>
 		<AppHeader />
 		<Router>
-			<Route path="/" element={HomePage} />
-			<Route path="/counter" element={CounterPage} />
-			<Route path="/users" element={UsersPage} />
-			<Route path="/user/:id" element={ProfilePage} />
+			if (root !== '') {
+				<Route path={`${root}/`} element={HomePage} />
+			}
+			<Route path={root || '/'} element={HomePage} />
+			<Route path={`${root}/counter`} element={CounterPage} />
+			<Route path={`${root}/users`} element={UsersPage} />
+			<Route path={`${root}/user/:id`} element={ProfilePage} />
 			<Route path="**" element={NotFoundPage} />
 		</Router>
 	</QueryClientProvider>

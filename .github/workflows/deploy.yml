@@ -42,7 +42,7 @@ jobs:
         working-directory: apps/my-ripple-app
         env:
           VITE_MOCK_API: 'true'
-          GITHUB_PAGES: 'true'
+          VITE_GITHUB_PAGES: 'true'
         run: pnpm build
 
       - name: Setup Pages

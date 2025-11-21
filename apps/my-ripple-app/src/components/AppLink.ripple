@@ -1,5 +1,6 @@
 import type { Component } from 'ripple';
 import { navigateTo } from 'ripple-router';
+import { getRootPath } from '../utils/base-path';
 
 function toHref(
 	path: string,
@@ -9,7 +10,23 @@ function toHref(
 	const url = options?.searchParams ? `${path}?${search}` : path;
 
 	const finalUrl = options?.hash ? `${url}#${options.hash}` : url;
-	return finalUrl;
+	const root = getRootPath();
+
+	if (path === '/') {
+		return root || '/';
+	}
+
+	return root + finalUrl;
+}
+
+function toNavPath(path: string): string {
+	const root = getRootPath();
+
+	if (path === '/') {
+		return root || '/';
+	}
+
+	return root + path;
 }
 
 export component AppLink(props: {
@@ -19,7 +36,8 @@ export component AppLink(props: {
 }) {
 	const navigate = (e) => {
 		e.preventDefault();
-		navigateTo(props.to, props.options);
+		const navPath = toNavPath(props.to);
+		navigateTo(navPath, props.options);
 	};
 
 	<a href={toHref(props.to, props.options)} onclick={navigate}>
