@@ -1,0 +1,21 @@
+import { Router, Route, Link } from 'ripple-router';
+import { HomePage } from './pages/HomePage.ripple';
+import { AboutPage } from './pages/AboutPage.ripple';
+import { UsersPage } from './pages/UsersPage.ripple';
+import { AppHeader } from './components/AppHeader.ripple';
+import { ProfilePage } from './pages/ProfilePage.ripple';
+import { NotFoundPage } from './pages/NotFoundPage.ripple';
+import { QueryClientProvider, queryClient } from './tanstack-stuff';
+
+export component App() {
+	<QueryClientProvider client={queryClient}>
+		<AppHeader />
+		<Router>
+			<Route path="/" element={UsersPage} />
+			<Route path="/home" element={HomePage} />
+			<Route path="/about" element={AboutPage} />
+			<Route path="/user/:id" element={ProfilePage} />
+			<Route path="**" element={NotFoundPage} />
+		</Router>
+	</QueryClientProvider>
+}

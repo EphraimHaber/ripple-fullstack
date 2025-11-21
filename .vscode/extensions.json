@@ -1,0 +1,9 @@
+{
+	"recommendations": [
+		"ripple-ts.ripple-ts-vscode-plugin",
+		"esbenp.prettier-vscode",
+		"dbaeumer.vscode-eslint",
+		"bradlc.vscode-tailwindcss",
+		"ms-vscode.vscode-typescript-next"
+	]
+}

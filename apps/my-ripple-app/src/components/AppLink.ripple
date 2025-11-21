@@ -1,0 +1,28 @@
+import type { Component } from 'ripple';
+import { navigateTo } from 'ripple-router';
+
+function toHref(
+	path: string,
+	options?: { replace?: boolean; searchParams?: Record<string, string>; hash?: string },
+): string {
+	const search = new URLSearchParams(options?.searchParams).toString();
+	const url = options?.searchParams ? `${path}?${search}` : path;
+
+	const finalUrl = options?.hash ? `${url}#${options.hash}` : url;
+	return finalUrl;
+}
+
+export component AppLink(props: {
+	to: string;
+	children: Component;
+	options?: { replace?: boolean; searchParams?: Record<string, string>; hash?: string };
+}) {
+	const navigate = (e) => {
+		e.preventDefault();
+		navigateTo(props.to, props.options);
+	};
+
+	<a href={toHref(props.to, props.options)} onclick={navigate}>
+		<props.children />
+	</a>
+}

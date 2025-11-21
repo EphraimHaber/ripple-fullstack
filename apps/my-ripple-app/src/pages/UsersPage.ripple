@@ -1,0 +1,85 @@
+import { createQuery } from 'tanstack-ripple-query';
+import { createApiHeaders } from '../utils/api.ripple';
+import { UserCard } from '../components/UserCard.ripple';
+import { track } from 'ripple';
+import type { User } from '../types.ripple';
+
+export component UsersPage() {
+	let simulateDelay = track(false);
+	let simulateError = track(false);
+
+	const query = createQuery(
+		track(
+			() => ({
+				queryKey: ['users', @simulateDelay, @simulateError],
+				queryFn: async () => {
+					const headers = createApiHeaders(
+						{
+							simulateDelay: @simulateDelay,
+							simulateError: @simulateError,
+						},
+					);
+					const response = await fetch('/api/users', { headers });
+					if (!response.ok) {
+						const error = await response.json();
+						throw new Error(error.message || 'Failed to fetch users');
+					}
+					return response.json() as Promise<User[]>;
+				},
+			}),
+		),
+	);
+
+	<div class="min-h-screen p-4">
+		<div class="container mx-auto max-w-4xl">
+			<div class="mb-8">
+				<h1 class="text-4xl font-bold mb-2">{'Users'}</h1>
+				<p class="text-muted-foreground">{'Browse all registered users'}</p>
+			</div>
+
+			<div class="mb-6 card p-4 space-y-3">
+				<h3 class="font-semibold text-sm">{'Testing Options'}</h3>
+				<label class="flex items-center gap-2 cursor-pointer">
+					<input
+						type="checkbox"
+						checked={@simulateDelay}
+						onChange={(e) => (@simulateDelay = (e.target as HTMLInputElement).checked)}
+						class="w-4 h-4 rounded border-input bg-background"
+					/>
+					<span class="text-sm">{'Simulate 3s delay'}</span>
+				</label>
+				<label class="flex items-center gap-2 cursor-pointer">
+					<input
+						type="checkbox"
+						checked={@simulateError}
+						onChange={(e) => (@simulateError = (e.target as HTMLInputElement).checked)}
+						class="w-4 h-4 rounded border-input bg-background"
+					/>
+					<span class="text-sm">{'Simulate error'}</span>
+				</label>
+			</div>
+
+			if (query.isLoading) {
+				<div class="flex items-center justify-center py-12">
+					<div class="text-center space-y-3">
+						<div class="animate-pulse">
+							<div class="h-12 w-12 bg-primary/20 rounded-full mx-auto" />
+						</div>
+						<p class="text-muted-foreground">{'Loading users...'}</p>
+					</div>
+				</div>
+			} else if (query.isError) {
+				<div class="card bg-destructive/10 border-destructive/50 p-6">
+					<h3 class="text-destructive font-semibold mb-2">{'Error Loading Users'}</h3>
+					<p class="text-sm text-muted-foreground">{`${query.error.message}`}</p>
+				</div>
+			} else if (query.isSuccess) {
+				<div class="grid gap-4">
+					for (const user of query.data; key user.id) {
+						<UserCard id={user.id} name={user.name} />
+					}
+				</div>
+			}
+		</div>
+	</div>
+}

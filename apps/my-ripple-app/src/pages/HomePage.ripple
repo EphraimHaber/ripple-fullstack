@@ -1,0 +1,64 @@
+import { track } from 'ripple';
+
+export component HomePage() {
+	let count = track(0);
+
+	<div class="min-h-screen flex items-center justify-center p-4">
+		<div class="card max-w-md w-full p-10 text-center space-y-6">
+			<div>
+				<h1 class="text-3xl font-bold mb-2">{'Welcome to Ripple'}</h1>
+				<p class="text-muted-foreground text-base">
+					{'The elegant TypeScript UI framework.'}
+				</p>
+			</div>
+
+			<img
+				src="../src/assets/ripple-logo-horizontal.png"
+				alt="Ripple Logo"
+				class="w-40 mx-auto"
+			/>
+
+			<div class="flex items-center justify-center gap-4 py-4">
+				<button
+					onClick={() => @count--}
+					class="btn btn-outline btn-icon text-lg font-semibold"
+				>
+					{'-'}
+				</button>
+				<span class="text-2xl font-semibold min-w-12 text-center">{@count}</span>
+				<button
+					onClick={() => @count++}
+					class="btn btn-outline btn-icon text-lg font-semibold"
+				>
+					{'+'}
+				</button>
+			</div>
+
+			<div class="flex justify-center gap-3">
+				<a href="https://www.ripplejs.com/" target="_blank" class="btn btn-primary">
+					{'Docs'}
+				</a>
+				<a
+					href="https://github.com/Ripple-TS/ripple"
+					target="_blank"
+					class="btn btn-secondary"
+				>
+					{'GitHub'}
+				</a>
+			</div>
+
+			<div class="pt-4 space-y-2">
+				<p class="text-sm text-muted-foreground">
+					{'This is a basic Ripple application template.'}
+				</p>
+				<p class="text-xs text-muted-foreground">
+					{'Edit '}
+					<code class="px-1.5 py-0.5 rounded bg-muted text-primary font-mono text-xs">
+						{'src/App.ripple'}
+					</code>
+					{' to get started.'}
+				</p>
+			</div>
+		</div>
+	</div>
+}

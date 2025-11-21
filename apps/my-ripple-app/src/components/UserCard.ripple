@@ -1,0 +1,20 @@
+import type { User } from '../types.ripple';
+import { AppLink } from './AppLink.ripple';
+
+export component UserCard(props: User) {
+	const { id, name } = props;
+
+	<div class="card p-6">
+		<div class="flex items-center gap-4">
+			<div class="h-12 w-12 rounded-full bg-primary/20 flex items-center justify-center">
+				<span class="text-lg font-bold text-primary">{name.charAt(0)}</span>
+			</div>
+			<div>
+				<AppLink to={`/user/${id}`}>
+					<h3 class="text-lg font-semibold hover:underline">{name}</h3>
+				</AppLink>
+				<p class="text-sm text-muted-foreground">{`User ID: ${id}`}</p>
+			</div>
+		</div>
+	</div>
+}

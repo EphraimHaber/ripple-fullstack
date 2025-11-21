@@ -1,0 +1,31 @@
+import { AppLink } from './AppLink.ripple';
+
+export component AppHeader() {
+	<header class="border-b bg-card/30 backdrop-blur-sm sticky top-0 z-50">
+		<div class="container mx-auto px-4 py-4">
+			<nav class="flex items-center justify-between">
+				<AppLink to="/">
+					<div
+						class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+					>
+						<div class="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
+							<span class="text-lg font-bold text-primary-foreground">{'R'}</span>
+						</div>
+						<h1 class="text-xl font-bold">{'My Ripple App'}</h1>
+					</div>
+				</AppLink>
+				<div class="flex items-center gap-2">
+					<AppLink to="/">
+						<span class="btn btn-ghost text-base">{'👥 Users'}</span>
+					</AppLink>
+					<AppLink to="/home">
+						<span class="btn btn-ghost text-base">{'🏠 Home'}</span>
+					</AppLink>
+					<AppLink to="/about">
+						<span class="btn btn-ghost text-base">{'ℹ️ About'}</span>
+					</AppLink>
+				</div>
+			</nav>
+		</div>
+	</header>
+}

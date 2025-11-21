@@ -1,0 +1,174 @@
+import type { RouteProps } from 'ripple-router';
+import { createQuery } from 'tanstack-ripple-query';
+import { getUserById } from '../services/user-service';
+import { track } from 'ripple';
+
+type ProfilePageProps = RouteProps<'/user/:id'>;
+export component ProfilePage(props: ProfilePageProps) {
+	const { params } = props;
+
+	let simulateDelay = track(true);
+	let simulateError = track(false);
+
+	const query = createQuery(
+		track(
+			() => ({
+				queryKey: ['profile', params.id, @simulateDelay, @simulateError],
+				queryFn: () => getUserById(Number(params.id), {
+					simulateDelay: @simulateDelay,
+					simulateError: @simulateError,
+				}),
+			}),
+		),
+	);
+
+	if (query.isLoading && !query.isError) {
+		console.log(query);
+		<div class="min-h-screen flex items-center justify-center p-4">
+			<div class="card max-w-lg w-full p-8">
+				<div class="mb-6">
+					<h1 class="text-3xl font-bold mb-2">{'User Profile'}</h1>
+					<p class="text-muted-foreground">{'View user information'}</p>
+				</div>
+
+				<div class="mb-6 p-4 bg-muted/30 rounded-lg space-y-3">
+					<h3 class="font-semibold text-sm">{'Testing Options'}</h3>
+					<label class="flex items-center gap-2 cursor-pointer">
+						<input
+							type="checkbox"
+							checked={@simulateDelay}
+							onChange={(e) => (@simulateDelay =
+								(e.target as HTMLInputElement).checked)}
+							class="w-4 h-4 rounded border-input bg-background"
+						/>
+						<span class="text-sm">{'Simulate 3s delay'}</span>
+					</label>
+					<label class="flex items-center gap-2 cursor-pointer">
+						<input
+							type="checkbox"
+							checked={@simulateError}
+							onChange={(e) => (@simulateError =
+								(e.target as HTMLInputElement).checked)}
+							class="w-4 h-4 rounded border-input bg-background"
+						/>
+						<span class="text-sm">{'Simulate error'}</span>
+					</label>
+				</div>
+
+				<div class="flex items-center justify-center py-8">
+					<div class="text-center space-y-3">
+						<div class="animate-pulse">
+							<div class="h-12 w-12 bg-primary/20 rounded-full mx-auto" />
+						</div>
+						<p class="text-muted-foreground">{'Loading user data...'}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	} else if (query.isError) {
+		<div class="min-h-screen flex items-center justify-center p-4">
+			<div class="card max-w-lg w-full p-8 space-y-6">
+				<div>
+					<h1 class="text-3xl font-bold mb-2">{'User Profile'}</h1>
+					<p class="text-muted-foreground">{'View user information'}</p>
+				</div>
+
+				<div class="p-4 bg-muted/30 rounded-lg space-y-3">
+					<h3 class="font-semibold text-sm">{'Testing Options'}</h3>
+					<label class="flex items-center gap-2 cursor-pointer">
+						<input
+							type="checkbox"
+							checked={@simulateDelay}
+							onChange={(e) => (@simulateDelay =
+								(e.target as HTMLInputElement).checked)}
+							class="w-4 h-4 rounded border-input bg-background"
+						/>
+						<span class="text-sm">{'Simulate 3s delay'}</span>
+					</label>
+					<label class="flex items-center gap-2 cursor-pointer">
+						<input
+							type="checkbox"
+							checked={@simulateError}
+							onChange={(e) => (@simulateError =
+								(e.target as HTMLInputElement).checked)}
+							class="w-4 h-4 rounded border-input bg-background"
+						/>
+						<span class="text-sm">{'Simulate error'}</span>
+					</label>
+				</div>
+
+				<div class="card bg-destructive/10 border-destructive/50 p-6">
+					<h3 class="text-destructive font-semibold mb-2">{'Error Loading Profile'}</h3>
+					<p class="text-sm text-muted-foreground">{`${query.error.message}`}</p>
+				</div>
+			</div>
+		</div>
+	} else if (query.isSuccess) {
+		<div class="min-h-screen flex items-center justify-center p-4">
+			<div class="card max-w-lg w-full p-8 space-y-6">
+				<div>
+					<h1 class="text-3xl font-bold mb-2">{'User Profile'}</h1>
+					<p class="text-muted-foreground">{'View user information'}</p>
+				</div>
+
+				<div class="p-4 bg-muted/30 rounded-lg space-y-3">
+					<h3 class="font-semibold text-sm">{'Testing Options'}</h3>
+					<label class="flex items-center gap-2 cursor-pointer">
+						<input
+							type="checkbox"
+							checked={@simulateDelay}
+							onChange={(e) => (@simulateDelay =
+								(e.target as HTMLInputElement).checked)}
+							class="w-4 h-4 rounded border-input bg-background"
+						/>
+						<span class="text-sm">{'Simulate 3s delay'}</span>
+					</label>
+					<label class="flex items-center gap-2 cursor-pointer">
+						<input
+							type="checkbox"
+							checked={@simulateError}
+							onChange={(e) => (@simulateError =
+								(e.target as HTMLInputElement).checked)}
+							class="w-4 h-4 rounded border-input bg-background"
+						/>
+						<span class="text-sm">{'Simulate error'}</span>
+					</label>
+				</div>
+
+				<div class="space-y-4">
+					<div class="card bg-muted/50 p-6 space-y-3">
+						<div class="flex items-center gap-4">
+							<div
+								class="h-16 w-16 rounded-full bg-primary/20 flex items-center justify-center"
+							>
+								<span class="text-2xl font-bold text-primary">
+									{query.data.name.charAt(0)}
+								</span>
+							</div>
+							<div>
+								<h2 class="text-2xl font-bold">{query.data.name}</h2>
+								<p class="text-sm text-muted-foreground">
+									{`User ID: ${query.data.id}`}
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="grid gap-3">
+						<div
+							class="flex justify-between items-center p-3 rounded-lg bg-background/50"
+						>
+							<span class="text-sm text-muted-foreground">{'Profile ID'}</span>
+							<span class="font-mono font-semibold">{query.data.id}</span>
+						</div>
+						<div
+							class="flex justify-between items-center p-3 rounded-lg bg-background/50"
+						>
+							<span class="text-sm text-muted-foreground">{'Display Name'}</span>
+							<span class="font-semibold">{query.data.name}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+}
