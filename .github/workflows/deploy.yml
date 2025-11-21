@@ -45,6 +45,10 @@ jobs:
           VITE_GITHUB_PAGES: 'true'
         run: pnpm build
 
+      - name: Copy index.html to 404.html
+        working-directory: apps/my-ripple-app
+        run: cp dist/index.html dist/404.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
