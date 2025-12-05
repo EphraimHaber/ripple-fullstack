@@ -64,22 +64,22 @@ export component HomePage() {
 							{'To run the full application with the backend:'}
 						</p>
 						<code
-							class="block p-3 sm:p-4 bg-muted rounded text-sm sm:text-base mb-2 sm:mb-3 font-mono overflow-x-auto"
+							class="block p-3 sm:p-4 bg-blue-500/10 rounded text-sm sm:text-base mb-2 sm:mb-3 font-mono overflow-x-auto"
 						>
-							{'pnpm preview'}
+							{'pnpm dev'}
 						</code>
 						<p class="text-sm sm:text-base">
-							{'This builds the frontend, starts the backend API server at '}
+							{'Backend runs at '}
 							<code
 								class="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded bg-muted text-primary font-mono text-xs sm:text-sm break-all"
 							>
 								{'http://localhost:3001'}
 							</code>
-							{', and serves the app at '}
+							{' and frontend at '}
 							<code
 								class="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded bg-muted text-primary font-mono text-xs sm:text-sm break-all"
 							>
-								{'http://localhost:4173'}
+								{'http://localhost:5173'}
 							</code>
 							{'.'}
 						</p>
